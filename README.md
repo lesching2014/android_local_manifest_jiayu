@@ -9,6 +9,7 @@ git clone https://github.com/lesching2014/android_local_manifest_jiayu
 mkdir .repo/local_manifests
 cp android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
 
+repo forall -vc "git reset --hard"
 repo sync 
 
 Build the code:
