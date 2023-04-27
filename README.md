@@ -5,7 +5,7 @@ Initialize a repository with LineageOS:
 
 repo init -u git://github.com/LineageOS/android.git -b cm-14.1
 
-repo clone local_manifest.xml .repo/local_manifests
+repo clone local_manifests.xml .repo/local_manifests
 
 Copy "s3_h560.xml" under android_src/.repo/local_manifests
 
