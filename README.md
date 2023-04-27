@@ -3,7 +3,7 @@ Local manifest for Jiayu s3 (Lineage os 14.1)
 
 Initialize a repository with LineageOS:
 
-repo init -u git://github.com/LineageOS/android.git -b cm-14.1
+repo init -u https://github.com/LineageOS/android -b cm-14.1
 
 git clone https://github.com/lesching2014/android_local_manifest_jiayu
 
