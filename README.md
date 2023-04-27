@@ -29,6 +29,7 @@ sh device/jiayu/s3_h560/patches_mtk/apply-patches.sh
 
 build ROM:
 ```
+sudo apt-get install openjdk-8-jdk
 source build/envsetup.sh
 breakfast s3_h560
 brunch s3_h560
