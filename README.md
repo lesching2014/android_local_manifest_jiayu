@@ -16,7 +16,7 @@ Build the code:
 turn on OMS Support:
 ```
 cd device/jiayu/s3_h560/patches_mtk/oms
-sh apply-oms.sh
+bash apply-oms.sh
 cd ../../../../..
 ```
 
