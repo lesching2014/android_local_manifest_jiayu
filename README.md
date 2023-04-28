@@ -58,6 +58,11 @@ SETTING_VERSION=4
 ```
 
 ```
+sed -e 's/jdk.tls.disabledAlgorithms=SSLv3,\(.*\)RC4,/\1/' /etc/java-8-openjdk/security/java.security
+#sed -i -e 's/^jdk.tls.disabledAlgorithms=.*/jdk.tls.disabledAlgorithms=SSLv3, RC4, DES, MD5withRSA, \/g' /etc/java-8-openjdk/security/java.security
+```
+
+```
 sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config-property
 sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config-property
 sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config-property
