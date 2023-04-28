@@ -2,18 +2,14 @@ Local manifest for Jiayu s3 (Lineage os 14.1)
 
 
 Initialize a repository with LineageOS:
-
+```
 repo init -u https://github.com/LineageOS/android -b cm-14.1
-
 git clone https://github.com/lesching2014/android_local_manifest_jiayu
-
 mkdir .repo/local_manifests
-
 cp android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
-
 repo forall -vc "git reset --hard"
-
 repo sync 
+```
 
 Build the code:
 
@@ -43,9 +39,11 @@ breakfast s3_h560
 brunch s3_h560
 ```
 
+```
 sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' ~/.jack-settings
 sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' ~/.jack-settings
 sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' ~/.jack-settings
+```
 
 .jack-settings
 ```
@@ -59,9 +57,11 @@ SERVER_NB_COMPILE=1
 SETTING_VERSION=4
 ```
 
+```
 sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config-property
 sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config-property
 sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config-property
+```
 
 .jack-server/config-property
 ```
