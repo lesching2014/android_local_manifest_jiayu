@@ -34,6 +34,9 @@ build ROM:
 ```
 sudo apt-get install openjdk-8-jdk
 export LC_ALL=C
+export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
+./prebuilts/sdk/tools/jack-admin kill-server
+./prebuilts/sdk/tools/jack-admin start-server
 source build/envsetup.sh
 breakfast s3_h560
 brunch s3_h560
