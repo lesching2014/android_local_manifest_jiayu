@@ -10,7 +10,10 @@
 
   <project path="external/stlport" name="LineageOS/android_external_stlport" revision="cm-14.1" />
   <project path="packages/resources/devicesettings" name="LineageOS/android_packages_resources_devicesettings" revision="cm-14.1" />
-  <project path="bootable/recovery-twrp" name="omnirom/android_bootable_recovery" revision="android-7.1" />
-  <project path="external/busybox" name="TeamWin/android_external_busybox" revision="android-8.0" />
+  
+  <remove-project name="LineageOS/android_bootable_recovery" />
+  <project path="bootable/recovery-twrp" name="omnirom/android_bootable_recovery" revision="android-9.0" />
+  <project path="external/busybox" name="TeamWin/android_external_busybox" revision="android-9.0" />
+  
   <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
 </manifest>
