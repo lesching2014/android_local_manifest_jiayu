@@ -39,6 +39,15 @@ breakfast s3_h560
 brunch s3_h560
 ```
 
+/etc/java-8-openjdk/security/java.security
+```
+cat /etc/java-8-openjdk/security/java.security|grep -i jdk.tls.disabledAlgorithms=SSLv3
+sudo chmod 777  /etc/java-8-openjdk/security
+sed -e 's/jdk.tls.disabledAlgorithms=SSLv3,\(.*\)RC4,/\1/' /etc/java-8-openjdk/security/java.security
+sudo chmod 755  /etc/java-8-openjdk/security
+```
+
+~/.jack-settings
 ```
 sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' ~/.jack-settings
 sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' ~/.jack-settings
@@ -57,13 +66,7 @@ SERVER_NB_COMPILE=1
 SETTING_VERSION=4
 ```
 
-```
-sudo chmod 777  /etc/java-8-openjdk/security
-sed -e 's/jdk.tls.disabledAlgorithms=SSLv3,\(.*\)RC4,/\1/' /etc/java-8-openjdk/security/java.security
-sudo chmod 755  /etc/java-8-openjdk/security
-#sed -i -e 's/^jdk.tls.disabledAlgorithms=.*/jdk.tls.disabledAlgorithms=SSLv3, RC4, DES, MD5withRSA, \/g' /etc/java-8-openjdk/security/java.security
-```
-
+~/.jack-server/config-property
 ```
 sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config-property
 sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config-property
