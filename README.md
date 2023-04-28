@@ -58,7 +58,9 @@ SETTING_VERSION=4
 ```
 
 ```
+sudo chmod 777  /etc/java-8-openjdk/security
 sed -e 's/jdk.tls.disabledAlgorithms=SSLv3,\(.*\)RC4,/\1/' /etc/java-8-openjdk/security/java.security
+sudo chmod 755  /etc/java-8-openjdk/security
 #sed -i -e 's/^jdk.tls.disabledAlgorithms=.*/jdk.tls.disabledAlgorithms=SSLv3, RC4, DES, MD5withRSA, \/g' /etc/java-8-openjdk/security/java.security
 ```
 
