@@ -29,11 +29,20 @@ sh device/jiayu/s3_h560/patches_mtk/apply-patches.sh
 build ROM:
 ```
 sudo apt-get install openjdk-8-jdk
-export LC_ALL=C
+
 export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
 export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx3G"
 ./prebuilts/sdk/tools/jack-admin kill-server
 ./prebuilts/sdk/tools/jack-admin start-server
+
+export LC_ALL=C
+source build/envsetup.sh
+breakfast s3_h560
+make bootimage
+make recoveryimage
+make systemimage
+
+export LC_ALL=C
 source build/envsetup.sh
 breakfast s3_h560
 brunch s3_h560
