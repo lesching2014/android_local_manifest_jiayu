@@ -43,6 +43,10 @@ breakfast s3_h560
 brunch s3_h560
 ```
 
+sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' ~/.jack-settings
+sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' ~/.jack-settings
+sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' ~/.jack-settings
+
 .jack-settings
 ```
 # Server settings
@@ -54,6 +58,10 @@ SERVER_NB_COMPILE=1
 # Internal, do not touch
 SETTING_VERSION=4
 ```
+
+sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config-property
+sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config-property
+sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config-property
 
 .jack-server/config-property
 ```
