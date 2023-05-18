@@ -75,14 +75,14 @@ SERVER_NB_COMPILE=1
 SETTING_VERSION=4
 ```
 
-~/.jack-server/config-property
+~/.jack-server/config.properties
 ```
-sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config-property
-sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config-property
-sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config-property
+sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config.properties
+sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config.properties
+sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config.properties
 ```
 
-.jack-server/config-property
+.jack-server/config.properties
 ```
 #
 #Thu Apr 27 19:17:32 HKT 2023
