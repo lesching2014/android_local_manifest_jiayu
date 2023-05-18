@@ -50,7 +50,7 @@ brunch s3_h560
 
 /etc/java-8-openjdk/security/java.security
 ```
-cat /etc/java-8-openjdk/security/java.security|grep -i jdk.tls.disabledAlgorithms=SSLv3
+cat /etc/java-8-openjdk/security/java.security|grep -i "TLSv1, TLSv1.1, "
 sudo chmod 777  /etc/java-8-openjdk/security
 sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' /etc/java-8-openjdk/security/java.security
 sudo chmod 755  /etc/java-8-openjdk/security
