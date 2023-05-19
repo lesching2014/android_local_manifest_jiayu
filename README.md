@@ -61,16 +61,18 @@ sudo chmod 755  /etc/java-8-openjdk/security
 sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' ~/.jack-settings
 sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' ~/.jack-settings
 sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' ~/.jack-settings
-sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4096m"' ~/.jack-settings
+sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' ~/.jack-settings
 ```
 
 .jack-settings
 ```
 # Server settings
+# Server settings
 SERVER_HOST=127.0.0.1
 SERVER_PORT_SERVICE=8386
 SERVER_PORT_ADMIN=8387
 SERVER_NB_COMPILE=1
+JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"
 
 # Internal, do not touch
 SETTING_VERSION=4
