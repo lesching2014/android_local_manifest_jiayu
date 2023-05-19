@@ -1,7 +1,5 @@
-read -p "Do you want to sync NOW? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" ]]; then
-    repo sync 
-fi
+#!/bin/bash
+
 echo "Repo sync method"
 echo "n. network only"
 echo "l. local only"
