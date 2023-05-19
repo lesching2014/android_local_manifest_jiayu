@@ -25,7 +25,7 @@ if [ -f $FILE ]; then
    echo "File $FILE exists."
    cat $FILE |grep -i "TLSv1, TLSv1.1, "
    sudo chmod 777  $FILE
-   sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
+   sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
    sudo chmod 755  $FILE
    cat $FILE |grep -i "TLSv1, TLSv1.1, "
 fi
