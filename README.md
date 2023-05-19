@@ -26,10 +26,14 @@ sh device/jiayu/s3_h560/patches_mtk/revert-patches.sh
 sh device/jiayu/s3_h560/patches_mtk/apply-patches.sh
 ```
 
-build ROM:
+Java
 ```
 sudo apt-get install openjdk-8-jdk
+sudo update-alternatives --config java
+```
 
+build ROM:
+```
 export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
 export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx3G"
 ./prebuilts/sdk/tools/jack-admin kill-server
