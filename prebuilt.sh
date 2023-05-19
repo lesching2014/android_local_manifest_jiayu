@@ -6,7 +6,7 @@ sudo update-alternatives --config java
 
 # Turn on OMS Support
 read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" ]]; then
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     cd device/jiayu/s3_h560/patches_mtk/oms
     bash apply-oms.sh
     cd ../../../../..
@@ -14,7 +14,7 @@ fi
 
 # Apply Mediatek patches
 read -p "Do you want to apply Mediatek patches? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" ]]; then
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     bash device/jiayu/s3_h560/patches_mtk/revert-patches.sh
     bash device/jiayu/s3_h560/patches_mtk/apply-patches.sh
 fi
