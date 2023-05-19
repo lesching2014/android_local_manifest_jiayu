@@ -4,7 +4,8 @@ echo "Repo sync method"
 echo "n. network only"
 echo "l. local only"
 echo "f. full sync"
-read "Choose ?" input
+echo "Choose your option:"
+read input
 
 case $input in  
   n|N) repo sync -n ;; 
