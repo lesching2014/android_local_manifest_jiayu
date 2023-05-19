@@ -5,13 +5,19 @@ sudo apt-get install openjdk-8-jdk
 sudo update-alternatives --config java
 
 # Turn on OMS Support
-cd device/jiayu/s3_h560/patches_mtk/oms
-bash apply-oms.sh
-cd ../../../../..
+read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" ]]; then
+    cd device/jiayu/s3_h560/patches_mtk/oms
+    bash apply-oms.sh
+    cd ../../../../..
+fi
 
-# Insert Mediatek patches
-sh device/jiayu/s3_h560/patches_mtk/revert-patches.sh
-sh device/jiayu/s3_h560/patches_mtk/apply-patches.sh
+# Apply Mediatek patches
+read -p "Do you want to apply Mediatek patches? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" ]]; then
+    bash device/jiayu/s3_h560/patches_mtk/revert-patches.sh
+    bash device/jiayu/s3_h560/patches_mtk/apply-patches.sh
+fi
 
 # Remove TLSv1 and TLSv1.1 from /etc/java-8-openjdk/security/java.security file
 FILE=/etc/java-8-openjdk/security/java.security 
