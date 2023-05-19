@@ -11,7 +11,7 @@ echo "1. boot image only"
 echo "2. recovery image only"
 echo "3. system image only"
 echo "4. all image (boot + recovery + system)"
-read -p "Do you want to sync NOW? [Y,n]" -i Y input
+read "Choose ?" input
 
 export LC_ALL=C
 source build/envsetup.sh
