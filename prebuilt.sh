@@ -52,7 +52,8 @@ else
 fi
 
 # Change setting from ~/.jack-server/config.properties
-FILE=~/.jack-server/config.properties 
+FILEPATH=~/.jack-server/
+FILE=$FILEPATH/config.properties
 if [ -f $FILE ]; then
    echo "File $FILE exists."
    sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' $FILE
@@ -60,6 +61,7 @@ if [ -f $FILE ]; then
    sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' $FILE
 else
    echo "File $FILE does not exist."
+   mkdir -p $FILEPATH
    echo "#" > $FILE
    echo "# $(date +'%a %b %d %T %Z %Y')" >> $FILE
    echo "jack.server.max-jars-size=104857600" >> $FILE
