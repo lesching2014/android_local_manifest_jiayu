@@ -1,104 +1,24 @@
 Local manifest for Jiayu s3 (Lineage os 14.1) 
 
+Clone local manifest
+```
+git clone https://github.com/lesching2014/android_local_manifest_jiayu
+cp ./android_local_manifest_jiayu/init.sh init.sh
+cp ./android_local_manifest_jiayu/prebuilt.sh prebuilt.sh
+cp ./android_local_manifest_jiayu/build.sh build.sh
+```
 
 Initialize a repository with LineageOS:
 ```
-repo init -u https://github.com/LineageOS/android -b cm-14.1
-git clone https://github.com/lesching2014/android_local_manifest_jiayu
-mkdir .repo/local_manifests
-cp android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
-repo forall -vc "git reset --hard"
-repo sync 
+bash init.sh
 ```
 
-Build the code:
-
-turn on OMS Support:
+Prebuild:
 ```
-cd device/jiayu/s3_h560/patches_mtk/oms
-bash apply-oms.sh
-cd ../../../../..
+bash prebuilt.sh
 ```
 
-insert Mediatek patches:
+Build ROM:
 ```
-sh device/jiayu/s3_h560/patches_mtk/revert-patches.sh
-sh device/jiayu/s3_h560/patches_mtk/apply-patches.sh
-```
-
-Java
-```
-sudo apt-get install openjdk-8-jdk
-sudo update-alternatives --config java
-```
-
-build ROM:
-```
-export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
-export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx3G"
-./prebuilts/sdk/tools/jack-admin kill-server
-./prebuilts/sdk/tools/jack-admin start-server
-
-export LC_ALL=C
-source build/envsetup.sh
-breakfast s3_h560
-make bootimage
-make recoveryimage
-make systemimage
-
-export LC_ALL=C
-source build/envsetup.sh
-breakfast s3_h560
-brunch s3_h560
-```
-
-/etc/java-8-openjdk/security/java.security
-```
-cat /etc/java-8-openjdk/security/java.security|grep -i "TLSv1, TLSv1.1, "
-sudo chmod 777  /etc/java-8-openjdk/security
-sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' /etc/java-8-openjdk/security/java.security
-sudo chmod 755  /etc/java-8-openjdk/security
-```
-
-~/.jack-settings
-```
-sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' ~/.jack-settings
-sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' ~/.jack-settings
-sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' ~/.jack-settings
-sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' ~/.jack-settings
-```
-
-.jack-settings
-```
-# Server settings
-# Server settings
-SERVER_HOST=127.0.0.1
-SERVER_PORT_SERVICE=8386
-SERVER_PORT_ADMIN=8387
-SERVER_NB_COMPILE=1
-JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"
-
-# Internal, do not touch
-SETTING_VERSION=4
-```
-
-~/.jack-server/config.properties
-```
-sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' ~/.jack-server/config.properties
-sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' ~/.jack-server/config.properties
-sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' ~/.jack-server/config.properties
-```
-
-.jack-server/config.properties
-```
-#
-#Thu Apr 27 19:17:32 HKT 2023
-jack.server.max-jars-size=104857600
-jack.server.max-service=1
-jack.server.service.port=8386
-jack.server.max-service.by-mem=1\=2147483648\:2\=3221225472\:3\=4294967296
-jack.server.admin.port=8387
-
-jack.server.config.version=2
-jack.server.time-out=7200
+bash build.sh
 ```
