@@ -52,8 +52,14 @@ if [ -f $FILE ]; then
    echo "File $FILE exists."
    sed -i -e 's/^SERVER_PORT_SERVICE=.*/SERVER_PORT_SERVICE=8386/g' $FILE
    sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' $FILE
-   sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' $FILE
-   sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
+   STRING='SERVER_NB_COMPILE=1'
+   if [[ $(grep -L $STRING $FILE) ]]; then
+       sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' $FILE
+   fi
+   STRING='JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"'
+   if [[ $(grep -L $STRING $FILE) ]]; then
+       sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
+   fi
    cat $FILE
 else
    echo "File $FILE does not exist."
