@@ -3,6 +3,15 @@
 # Install Java 8 and change default
 sudo apt-get install openjdk-8-jdk
 sudo update-alternatives --config java
+FILE=/etc/environment
+STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
+if [[ $(grep -L $STRING $FILE) ]]; then   
+    echo $STRING >> $FILE
+fi
+STRING='PATH=$JAVA_HOME/bin:$PATH'
+if [[ $(grep -L $STRING $FILE) ]]; then
+    echo $STRING >> $FILE
+fi
 
 # Turn on OMS Support
 read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
