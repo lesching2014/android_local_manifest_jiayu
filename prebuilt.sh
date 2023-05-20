@@ -3,17 +3,21 @@
 # Install Java 8 and change default
 FILE=/etc/environment
 STRING='java-1.8.0-openjdk-amd64'
-if [[ $(update-java-alternatives --list | grep $STRING) ]]; then
+if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
     sudo apt-get install openjdk-8-jdk
     sudo update-alternatives --config java
 fi
 STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
 if [[ $(grep -L $STRING $FILE) ]]; then
-    echo $STRING >> $FILE
+    sudo chmod 777 $FILE
+    sudo echo $STRING >> $FILE
+    sudo chmod 644 $FILE
 fi
 STRING='PATH=$JAVA_HOME/bin:$PATH'
 if [[ $(grep -L $STRING $FILE) ]]; then
+    sudo chmod 777 $FILE
     echo $STRING >> $FILE
+    sudo chmod 644 $FILE
 fi
 
 # Turn on OMS Support
