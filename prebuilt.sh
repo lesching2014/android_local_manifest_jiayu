@@ -19,6 +19,7 @@ if [[ $(grep -L $STRING $FILE) ]]; then
     echo $STRING >> $FILE
     sudo chmod 644 $FILE
 fi
+source $FILE
 
 # Turn on OMS Support
 read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
