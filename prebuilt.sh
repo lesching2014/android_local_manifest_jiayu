@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # Install Java 8 and change default
-sudo apt-get install openjdk-8-jdk
-sudo update-alternatives --config java
 FILE=/etc/environment
+STRING='java-1.8.0-openjdk-amd64'
+if [[ $(update-java-alternatives --list | grep $STRING) ]]; then
+    sudo apt-get install openjdk-8-jdk
+    sudo update-alternatives --config java
+fi
 STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
-if [[ $(grep -L $STRING $FILE) ]]; then   
+if [[ $(grep -L $STRING $FILE) ]]; then
     echo $STRING >> $FILE
 fi
 STRING='PATH=$JAVA_HOME/bin:$PATH'
