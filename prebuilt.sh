@@ -76,6 +76,7 @@ else
 fi
 
 # Change setting from ~/.jack-server/config.properties
+mkdir -p ~/.jack-server/logs
 FILEPATH=~/.jack-server/
 FILE=$FILEPATH/config.properties
 if [ -f $FILE ]; then
