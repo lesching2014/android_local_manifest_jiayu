@@ -46,6 +46,7 @@ if [ -f $FILE ]; then
    sudo chmod 755  $FILE
    cat $FILE | grep -i "TLSv1, TLSv1.1, "
 fi
+sudo chmod 600 $FILE
 
 # Change setting from ~/.jack-settings
 FILE=~/.jack-settings 
@@ -74,6 +75,7 @@ else
    echo "# Internal, do not touch" >> $FILE
    echo "SETTING_VERSION=4" >> $FILE
 fi
+sudo chmod 600 $FILE
 
 # Change setting from ~/.jack-server/config.properties
 mkdir -p ~/.jack-server/logs
@@ -99,3 +101,4 @@ else
    echo "jack.server.config.version=2" >> $FILE
    echo "jack.server.time-out=7200" >> $FILE
 fi
+sudo chmod 600 $FILE
