@@ -14,7 +14,7 @@ echo "1. boot image only"
 echo "2. recovery image only"
 echo "3. system image only"
 echo "4. all image (boot + recovery + system)"
-read -p "Choose your option:" input
+read -p "Choose your option:[Enter key:4]" input
 
 export LC_ALL=C
 source build/envsetup.sh
