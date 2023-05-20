@@ -24,6 +24,6 @@ case $input in
   1) make bootimage ;; 
   2) make recoveryimage ;; 
   3) make systemimage ;;
-  4) brunch s3_h560 ;;  
+  4|"") brunch s3_h560 ;;  
   *) echo dont know ;; 
 esac
