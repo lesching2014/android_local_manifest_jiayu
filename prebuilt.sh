@@ -56,7 +56,7 @@ if [ -f $FILE ]; then
    if [[ $(grep -L $STRING $FILE) ]]; then
        sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' $FILE
    fi
-   STRING='JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"'
+   STRING='JACK_SERVER_VM_ARGUMENTS='
    if [[ $(grep -L $STRING $FILE) ]]; then
        sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
    fi
