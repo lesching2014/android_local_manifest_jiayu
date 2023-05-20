@@ -35,11 +35,11 @@ fi
 FILE=/etc/java-8-openjdk/security/java.security 
 if [ -f $FILE ]; then
    echo "File $FILE exists."
-   cat $FILE |grep -i "TLSv1, TLSv1.1, "
+   cat $FILE | grep -i "TLSv1, TLSv1.1, "
    sudo chmod 777  $FILE
    sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
    sudo chmod 755  $FILE
-   cat $FILE |grep -i "TLSv1, TLSv1.1, "
+   cat $FILE | grep -i "TLSv1, TLSv1.1, "
 fi
 
 # Change setting from ~/.jack-settings
@@ -50,6 +50,7 @@ if [ -f $FILE ]; then
    sed -i -e 's/^SERVER_PORT_ADMIN=.*/SERVER_PORT_ADMIN=8387/g' $FILE
    sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' $FILE
    sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
+   cat $FILE
 else
    echo "File $FILE does not exist."
    echo "# Server settings" > $FILE
@@ -71,6 +72,7 @@ if [ -f $FILE ]; then
    sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' $FILE
    sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' $FILE
    sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' $FILE
+   cat $FILE
 else
    echo "File $FILE does not exist."
    mkdir -p $FILEPATH
