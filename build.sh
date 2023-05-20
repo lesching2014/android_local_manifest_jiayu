@@ -6,8 +6,8 @@
 # ./prebuilts/sdk/tools/jack-admin kill-server
 # ./prebuilts/sdk/tools/jack-admin start-server
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export PATH=$JAVA_HOME/bin:$PATH
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export PATH=$JAVA_HOME/bin:$PATH
 
 echo "Building ROM"
 echo "1. boot image only"
