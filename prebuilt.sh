@@ -1,4 +1,8 @@
 #!/bin/bash
+sudo ln -s /usr/bin/python2.7 /usr/bin/python
+sudo apt install gcc-9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 100
 
 if [ -z "$(git config user.name)" ]; then
     git config --global user.name "Your Name"
