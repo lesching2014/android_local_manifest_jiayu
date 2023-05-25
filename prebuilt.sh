@@ -16,6 +16,7 @@ FILE=/etc/environment
 STRING='java-1.8.0-openjdk-amd64'
 if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
     sudo apt-get install openjdk-8-jdk
+    sudo apt-get install openjdk-8-jre
     sudo update-alternatives --config java
 fi
 STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
