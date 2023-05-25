@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ -z "$(git config user.name)" ]; then
+    git config --global user.name "Your Name"
+fi
+if [ -z "$(git config user.email)" ]; then
+    git config --global user.email "you@example.com"
+fi
+
 # Install Java 8 and change default
 FILE=/etc/environment
 STRING='java-1.8.0-openjdk-amd64'
