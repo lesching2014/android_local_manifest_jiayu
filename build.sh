@@ -1,15 +1,18 @@
 #!/bin/bash
 
-# build ROM:
-# export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
-# export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx3G"
-# export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
-# ./prebuilts/sdk/tools/jack-admin kill-server
-# ./prebuilts/sdk/tools/jack-admin start-server
+# Increase Java maximum memory to 4G
+read -p "Do you want to increase to 4G? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+    export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
+    # ./prebuilts/sdk/tools/jack-admin kill-server
+    # ./prebuilts/sdk/tools/jack-admin start-server
+fi
 
+# export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx3G"
 # export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 # export PATH=$JAVA_HOME/bin:$PATH
 
+# Build ROM
 echo "Building ROM"
 echo "1. boot image only"
 echo "2. recovery image only"
