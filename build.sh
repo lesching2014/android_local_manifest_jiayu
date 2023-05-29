@@ -22,9 +22,9 @@ source build/envsetup.sh
 breakfast s3_h560
 
 case $input in  
-  1) make bootimage ;; 
-  2) make recoveryimage ;; 
-  3) make systemimage ;;
+  1) make -j4 bootimage ;; 
+  2) make -j4 recoveryimage ;; 
+  3) make -j4 systemimage ;;
   4|"") brunch s3_h560 ;;  
   *) echo dont know ;; 
 esac
