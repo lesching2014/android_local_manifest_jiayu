@@ -97,9 +97,9 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
         # Modify server compile number
         read -p "Do you want to modify SERVER_NB_COMPILE? [Y,n]" -i Y input
         if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-            STRING='SERVER_NB_COMPILE=1'
+            STRING='SERVER_NB_COMPILE='
             if [[ $(grep -L $STRING $FILE) ]]; then
-                sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=1' $FILE
+                sed -i -e '/^SERVER_PORT_ADMIN=.*/a SERVER_NB_COMPILE=4' $FILE
             fi
         fi
         
@@ -108,7 +108,7 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
         if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
             STRING='JACK_SERVER_VM_ARGUMENTS='
             if [[ $(grep -L $STRING $FILE) ]]; then
-                sed -i -e '/^SERVER_NB_COMPILE=1/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
+                sed -i -e '/^SERVER_NB_COMPILE=4/a JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"' $FILE
             fi
         fi
         cat $FILE
@@ -121,7 +121,7 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
             echo "SERVER_HOST=127.0.0.1" >> $FILE
             echo "SERVER_PORT_SERVICE=8386" >> $FILE
             echo "SERVER_PORT_ADMIN=8387" >> $FILE
-            echo "SERVER_NB_COMPILE=1" >> $FILE
+            echo "SERVER_NB_COMPILE=4" >> $FILE
             echo "JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192m"" >> $FILE
             echo "" >> $FILE
             echo "# Internal, do not touch" >> $FILE
@@ -134,7 +134,7 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     FILEPATH=~/.jack-server/
     FILE=~/.jack-server/config.properties
     if [ -f $FILE ]; then
-        sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=1/g' $FILE
+        sed -i -e 's/^jack.server.max-service=.*/jack.server.max-service=4/g' $FILE
         sed -i -e 's/^jack.server.service.port=.*/jack.server.service.port=8386/g' $FILE
         sed -i -e 's/^jack.server.admin.port=.*/jack.server.admin.port=8387/g' $FILE
         cat $FILE
@@ -147,7 +147,7 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
             echo "#" > $FILE
             echo "# $(date +'%a %b %d %T %Z %Y')" >> $FILE
             echo "jack.server.max-jars-size=104857600" >> $FILE
-            echo "jack.server.max-service=1" >> $FILE
+            echo "jack.server.max-service=4" >> $FILE
             echo "jack.server.service.port=8386" >> $FILE
             echo "jack.server.max-service.by-mem=1\=2147483648\:2\=3221225472\:3\=4294967296" >> $FILE
             echo "jack.server.admin.port=8387" >> $FILE
