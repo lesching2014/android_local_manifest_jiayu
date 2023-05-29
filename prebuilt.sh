@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # Install essential packages
 read -p "Do you want to install esseential packages? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
@@ -10,6 +9,17 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev \
     libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool \
     squashfs-tools xsltproc zip zlib1g-dev libwxgtk3.0-dev openjdk-8-jdk python2.7 python3
+fi
+
+# Create ccache
+read -p "Do you want to create ccache? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+    FILE=~/.bashrc
+    echo export USE_CCACHE=1 >> $FILE
+    echo export CCACHE_EXEC=/usr/bin/ccache >> $FILE
+    source $FILE
+    ccache -M 50G
+    ccache -o compression=true
 fi
 
 # Create symlink of python from python2.7
