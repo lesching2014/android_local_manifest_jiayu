@@ -39,6 +39,13 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     fi
 fi
 
+JAVA_MAJOR_VERSION=$(java -version 2>&1 | grep -oP 'version "?(1\.)?\K\d+' || true)
+if [[ $JAVA_MAJOR_VERSION -eq 8 ]]; then
+    echo "Java 8 is required"
+else
+    echo "Java major version is $JAVA_MAJOR_VERSION."
+fi
+
 # Install Java 8 and change default
 read -p "Do you want to install Java 8? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
