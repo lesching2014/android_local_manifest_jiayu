@@ -17,7 +17,7 @@ bash ./android_local_manifest_jiayu/sync.sh
 
 Prebuild setting
 ```
-bash ./android_local_manifest_jiayu/prebuilt.sh
+bash ./android_local_manifest_jiayu/prebuild.sh
 ```
 
 Build ROM
