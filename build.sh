@@ -18,9 +18,8 @@ read -p "Choose your option:[Enter key:4]" input
 source build/envsetup.sh
 breakfast s3_h560
 if [[ $IncreaseAns == "Y" || $IncreaseAns == "y" || $IncreaseAns == "" ]]; then
-    export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8g"
-    # ./prebuilts/sdk/tools/jack-admin kill-server
-    # ./prebuilts/sdk/tools/jack-admin start-server
+    ./prebuilts/sdk/tools/jack-admin kill-server
+    export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
 fi
 export LC_ALL=C
 
