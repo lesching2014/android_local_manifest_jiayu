@@ -49,13 +49,14 @@ fi
 # Install Java 8 and change default
 read -p "Do you want to install Java 8? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    FILE=/etc/environment
     STRING='java-1.8.0-openjdk-amd64'
     if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
         sudo apt-get install openjdk-8-jdk
 #        sudo apt-get install openjdk-8-jre
         sudo update-alternatives --config java
     fi
+    FILE=/etc/environment
+    sudo chmod 777  $FILE
     STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
     if [[ $(grep -L $STRING $FILE) ]]; then
         sudo echo $STRING >> $FILE
@@ -64,6 +65,7 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     if [[ $(grep -L $STRING $FILE) ]]; then
         sudo echo $STRING >> $FILE
     fi
+    sudo chmod 644  $FILE
     source $FILE
 fi
 
