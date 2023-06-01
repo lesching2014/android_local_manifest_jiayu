@@ -41,32 +41,30 @@ fi
 
 JAVA_MAJOR_VERSION=$(java -version 2>&1 | grep -oP 'version "?(1\.)?\K\d+' || true)
 if [[ $JAVA_MAJOR_VERSION -eq 8 ]]; then
-    echo "Java 8 is required"
+    echo "Java 8 is installed "
 else
-    echo "Java major version is $JAVA_MAJOR_VERSION."
-fi
-
-# Install Java 8 and change default
-read -p "Do you want to install Java 8? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    STRING='java-1.8.0-openjdk-amd64'
-    if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
-        sudo apt-get install openjdk-8-jdk
+    # Install Java 8 and change default
+    #read -p "Do you want to install Java 8? [Y,n]" -i Y input
+    #if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+        STRING='java-1.8.0-openjdk-amd64'
+        if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
+            sudo apt-get install openjdk-8-jdk
 #        sudo apt-get install openjdk-8-jre
-        sudo update-alternatives --config java
-    fi
-    FILE=/etc/environment
-    sudo chmod 777  $FILE
-    STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
-    if [[ $(grep -L $STRING $FILE) ]]; then
-        sudo echo $STRING >> $FILE
-    fi
-    STRING='PATH=$JAVA_HOME/bin:$PATH'
-    if [[ $(grep -L $STRING $FILE) ]]; then
-        sudo echo $STRING >> $FILE
-    fi
-    sudo chmod 644  $FILE
-    source $FILE
+            sudo update-alternatives --config java
+        fi
+        FILE=/etc/environment
+        sudo chmod 777  $FILE
+        STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
+        if [[ $(grep -L $STRING $FILE) ]]; then
+            sudo echo $STRING >> $FILE
+        fi
+        STRING='PATH=$JAVA_HOME/bin:$PATH'
+        if [[ $(grep -L $STRING $FILE) ]]; then
+            sudo echo $STRING >> $FILE
+        fi
+        sudo chmod 644  $FILE
+        source $FILE
+    #fi
 fi
 
 # Install gcc-9
