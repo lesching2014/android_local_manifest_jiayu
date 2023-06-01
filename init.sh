@@ -30,3 +30,8 @@ repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14
 mkdir -p .repo/local_manifests
 cp -f android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
 # repo forall -vc "git reset --hard"
+
+repopath=$(which repo)
+if [ "$repopath" ] ; then
+    sudo cp -f .repo/repo/repo $repopath 
+fi
