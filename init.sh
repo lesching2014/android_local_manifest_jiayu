@@ -1,5 +1,12 @@
 #!/bin/bash
 
+version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [[ -z "$version" ]] ; then
+    if python2 --version ; then
+    	sudo ln -s /usr/bin/python2 /usr/bin/python
+    fi
+fi
+
 mkdir -p ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod a+x ~/bin/repo
