@@ -8,10 +8,19 @@ if [ -z "$(git config user.email)" ]; then
 fi
 
 version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [[ -z "$version" ]] ; then
-    if [ "$(python2 --version)" ]; then
-    	sudo ln -s /usr/bin/python2 /usr/bin/python
-    fi
+version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+version3=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ -z "$version2" ] ; then
+    sudo apt install python2.7
+    sudo ln -s /usr/bin/python2.7 /usr/bin/python2
+fi
+version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ "$version" = "$version3" ] ; then
+    sudo rm -f /usr/bin/python
+fi
+version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ -z "$version" ] ; then
+    sudo ln -s /usr/bin/python2 /usr/bin/python
 fi
 
 mkdir -p ~/bin
