@@ -80,7 +80,7 @@ fi
 read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     cd device/jiayu/s3_h560/patches_mtk/oms
-    bash apply-oms.sh
+    bash apply-oms.sh <<<y
     cd ../../../../..
 fi
 
