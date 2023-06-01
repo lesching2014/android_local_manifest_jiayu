@@ -1,8 +1,15 @@
 #!/bin/bash
 
+if [ -z "$(git config user.name)" ]; then
+    git config --global user.name "Your Name"
+fi
+if [ -z "$(git config user.email)" ]; then
+    git config --global user.email "you@example.com"
+fi
+
 version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
 if [[ -z "$version" ]] ; then
-    if python2 --version ; then
+    if [ "$(python2 --version)" ]; then
     	sudo ln -s /usr/bin/python2 /usr/bin/python
     fi
 fi
