@@ -13,6 +13,7 @@ echo "1. boot image only"
 echo "2. recovery image only"
 echo "3. system image only"
 echo "4. all image (boot + recovery + system)"
+echo "5. clean"
 read -p "Choose your option:[Enter key:4]" input
 
 source build/envsetup.sh
@@ -27,6 +28,7 @@ case $input in
   1) make -j4 bootimage ;; 
   2) make -j4 recoveryimage ;; 
   3) make -j4 systemimage ;;
-  4|"") brunch s3_h560 ;;  
+  4|"") brunch s3_h560 ;;
+  5) make clean ;;
   *) echo dont know ;; 
 esac
