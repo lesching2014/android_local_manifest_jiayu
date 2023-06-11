@@ -82,7 +82,10 @@ fi
 # Install gcc-9
 read -p "Do you want to install gcc-9? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
+    GCC_MAJOR_VERSION=$(gcc --version | grep ^gcc | sed 's/^.* //g' | cut -f1 -d.)
+    if [[ $GCC_MAJOR_VERSION -eq 9 ]]; then
+        echo "gcc-9 is installed "
+    else
         sudo apt install gcc-9
         sudo update-alternatives --config gcc
     fi
