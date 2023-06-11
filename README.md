@@ -1,5 +1,10 @@
 Local manifest for Jiayu s3 (LineageOS 14.1) 
 
+Install essential packages and Modify settings
+```
+bash ./android_local_manifest_jiayu/settings.sh
+```
+
 Clone local manifest
 ```
 git clone https://github.com/lesching2014/android_local_manifest_jiayu
