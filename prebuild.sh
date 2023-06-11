@@ -9,7 +9,24 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev \
     libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool \
     squashfs-tools xsltproc zip zlib1g-dev openjdk-8-jdk python2.7
-    sudo apt install libwxgtk3.0-dev python3
+    # sudo apt install libwxgtk3.0-dev python3
+fi
+
+# Create symlink of python from python2.7
+version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+version3=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ -z "$version2" ] ; then
+    sudo apt install python2.7
+    sudo ln -s /usr/bin/python2.7 /usr/bin/python2
+fi
+version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ "$version" = "$version3" ] ; then
+    sudo rm -f /usr/bin/python
+fi
+version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+if [ -z "$version" ] ; then
+    sudo ln -s /usr/bin/python2 /usr/bin/python
 fi
 
 # Create ccache
@@ -21,12 +38,6 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     source $FILE
     ccache -M 50G
     ccache -o compression=true
-fi
-
-# Create symlink of python from python2.7
-read -p "Do you want to create symlink of python? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    sudo ln -s /usr/bin/python2.7 /usr/bin/python
 fi
 
 # Config git user's name and email
