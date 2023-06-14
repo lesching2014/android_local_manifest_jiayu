@@ -91,15 +91,15 @@ fi
 # fi
 
 # Remove TLSv1 and TLSv1.1 from /etc/java-8-openjdk/security/java.security file
-read -p "Do you want to remove TLSv1 and TLSv1.1? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+# read -p "Do you want to remove TLSv1 and TLSv1.1? [Y,n]" -i Y input
+# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     FILE=/etc/java-8-openjdk/security/java.security 
     if [ -f $FILE ]; then
         cat $FILE | grep -i "TLSv1, TLSv1.1, "
         sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
         cat $FILE | grep -i "TLSv1, TLSv1.1, "
     fi
-fi
+# fi
 
 # Modify port number from ~/.jack-settings
 read -p "Do you want to modify port number? [Y,n]" -i Y input
