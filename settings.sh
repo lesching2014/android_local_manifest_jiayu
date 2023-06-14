@@ -12,6 +12,20 @@
     # sudo apt install libwxgtk3.0-dev python3
 # fi
 
+#Install repo
+FILE=~/bin/repo
+if [ ! -e "$FILE" ]; then
+    mkdir -p ~/bin
+    curl https://storage.googleapis.com/git-repo-downloads/repo > $FILE
+    chmod a+x $FILE
+    FILE=~/.profile
+    # set PATH so it includes user's private bin if it exists
+    if [ -d "$HOME/bin" ] ; then
+        echo PATH="$HOME/bin:$PATH" >> $FILE
+    fi
+    source $FILE
+fi
+
 # Create symlink of python from python2.7
 version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
 version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
