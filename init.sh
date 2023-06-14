@@ -34,11 +34,24 @@ if [ -d "$HOME/bin" ] ; then
 fi
 source $FILE
 
-# Initialize a repository with LineageOS
-repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14.1
-mkdir -p .repo/local_manifests
-cp -f android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
-# repo forall -vc "git reset --hard"
+echo "Select lineage version"
+echo "1. lineageos 14.1"
+echo "2. lineageos 15.0"
+read -p "Choose your option:[1,2]" input
+
+if [[ "$input" == "1" ]]; then
+    # Initialize a repository with LineageOS
+    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14.1
+    mkdir -p .repo/local_manifests
+    cp -f android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
+    # repo forall -vc "git reset --hard"
+elif [[ "$input" == "2" ]]; then
+    # Initialize a repository with LineageOS
+    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b lineage-15.0
+    mkdir -p .repo/local_manifests
+    cp -f android_local_manifest_jiayu/lineage-15.0.xml .repo/local_manifests
+    # repo forall -vc "git reset --hard"
+fi
 
 repopath=$(which repo)
 if [ "$repopath" ] ; then
