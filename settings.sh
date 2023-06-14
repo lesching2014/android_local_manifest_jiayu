@@ -101,7 +101,7 @@ fi
     if [ -f $FILE ]; then
         cat $FILE | grep -i "TLSv1, TLSv1.1, "
         sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
-        cat $FILE | grep -i "TLSv1, TLSv1.1, "
+        echo "AFTER sed......." | cat $FILE | grep -i "TLSv1, TLSv1.1, "
     fi
 # fi
 
