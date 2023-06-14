@@ -1,95 +1,15 @@
 #!/bin/bash
 
-# Install essential packages
-read -p "Do you want to install esseential packages? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    sudo apt install bc bison build-essential ccache curl \
-    flex g++-multilib gcc-multilib git git-lfs gnupg gperf \
-    imagemagick lib32ncurses-dev lib32readline-dev lib32z1-dev \
-    libelf-dev liblz4-tool libncurses5 libncurses5-dev libsdl1.2-dev \
-    libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool \
-    squashfs-tools xsltproc zip zlib1g-dev openjdk-8-jdk python2.7
-    # sudo apt install libwxgtk3.0-dev python3
-fi
-
-# Create symlink of python from python2.7
-version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-version3=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ -z "$version2" ] ; then
-    sudo apt install python2.7
-    sudo ln -s /usr/bin/python2.7 /usr/bin/python2
-fi
-version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ "$version" = "$version3" ] ; then
-    sudo rm -f /usr/bin/python
-fi
-version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ -z "$version" ] ; then
-    sudo ln -s /usr/bin/python2 /usr/bin/python
-fi
-
-# Create ccache
-read -p "Do you want to create ccache? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    FILE=~/.bashrc
-    echo export USE_CCACHE=1 >> $FILE
-    echo export CCACHE_EXEC=/usr/bin/ccache >> $FILE
-    source $FILE
-    ccache -M 50G
-    ccache -o compression=true
-fi
-
 # Config git user's name and email
-read -p "Do you want to config user's name and email? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+# read -p "Do you want to config user's name and email? [Y,n]" -i Y input
+# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     if [ -z "$(git config user.name)" ]; then
         git config --global user.name "Your Name"
     fi
     if [ -z "$(git config user.email)" ]; then
         git config --global user.email "you@example.com"
     fi
-fi
-
-JAVA_MAJOR_VERSION=$(java -version 2>&1 | grep -oP 'version "?(1\.)?\K\d+' || true)
-if [[ $JAVA_MAJOR_VERSION -eq 8 ]]; then
-    echo "Java 8 is installed "
-else
-    # Install Java 8 and change default
-    #read -p "Do you want to install Java 8? [Y,n]" -i Y input
-    #if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-        STRING='java-1.8.0-openjdk-amd64'
-        if [[ $(update-java-alternatives --list | grep -L $STRING) ]]; then
-            sudo apt-get install openjdk-8-jdk
-#        sudo apt-get install openjdk-8-jre
-            sudo update-alternatives --config java
-        fi
-        FILE=/etc/environment
-        sudo chmod 777  $FILE
-        STRING='JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
-        if [[ $(grep -L $STRING $FILE) ]]; then
-            sudo echo $STRING >> $FILE
-        fi
-        STRING='PATH=$JAVA_HOME/bin:$PATH'
-        if [[ $(grep -L $STRING $FILE) ]]; then
-            sudo echo $STRING >> $FILE
-        fi
-        sudo chmod 644  $FILE
-        source $FILE
-    #fi
-fi
-
-# Install gcc-9
-read -p "Do you want to install gcc-9? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    GCC_MAJOR_VERSION=$(gcc --version | grep ^gcc | sed 's/^.* //g' | cut -f1 -d.)
-    if [[ $GCC_MAJOR_VERSION -eq 9 ]]; then
-        echo "gcc-9 is installed "
-    else
-        sudo apt install gcc-9
-        sudo update-alternatives --config gcc
-    fi
-fi
+# fi
 
 # Turn on OMS Support
 read -p "Do you want to turn on OMS support? [Y,n]" -i Y input
@@ -104,17 +24,6 @@ read -p "Do you want to apply Mediatek patches? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     bash device/jiayu/s3_h560/patches_mtk/revert-patches.sh
     bash device/jiayu/s3_h560/patches_mtk/apply-patches.sh
-fi
-
-# Remove TLSv1 and TLSv1.1 from /etc/java-8-openjdk/security/java.security file
-read -p "Do you want to remove TLSv1 and TLSv1.1? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    FILE=/etc/java-8-openjdk/security/java.security 
-    if [ -f $FILE ]; then
-        cat $FILE | grep -i "TLSv1, TLSv1.1, "
-        sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
-        cat $FILE | grep -i "TLSv1, TLSv1.1, "
-    fi
 fi
 
 # Modify port number from ~/.jack-settings
