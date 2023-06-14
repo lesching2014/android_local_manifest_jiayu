@@ -44,15 +44,19 @@ if [ -z "$version" ] ; then
 fi
 
 # Create ccache
-read -p "Do you want to create ccache? [Y,n]" -i Y input
-if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
-    FILE=~/.bashrc
-    echo export USE_CCACHE=1 >> $FILE
-    echo export CCACHE_EXEC=/usr/bin/ccache >> $FILE
-    source $FILE
-    ccache -M 50G
-    ccache -o compression=true
-fi
+# read -p "Do you want to create ccache? [Y,n]" -i Y input
+# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+    if [[ "$(ccache --show-stats | grep 'max cache size' | cut -d' ' -f25)" != "50.0" ]]; then
+        FILE=~/.bashrc
+        echo export USE_CCACHE=1 >> $FILE
+        echo export CCACHE_EXEC=/usr/bin/ccache >> $FILE
+        source $FILE
+        ccache -M 50G
+        ccache -o compression=true
+    else
+        echo "Set cache size limit to 50.0 GB"    
+    fi
+# fi
 
 JAVA_MAJOR_VERSION=$(java -version 2>&1 | grep -oP 'version "?(1\.)?\K\d+' || true)
 if [[ $JAVA_MAJOR_VERSION -eq 8 ]]; then
