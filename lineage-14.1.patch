@@ -1,0 +1,88 @@
+diff --git a/Lineageos-14-old/bootable/recovery-twrp/Android.mk b/Lineageos-14-new/bootable/recovery-twrp/Android.mk
+index 85cdd32..a096bce 100644
+--- a/Lineageos-14-old/bootable/recovery-twrp/Android.mk
++++ b/Lineageos-14-new/bootable/recovery-twrp/Android.mk
+@@ -475,7 +475,7 @@ else
+ endif
+ endif
+ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
+-ifeq ($(shell test $(CM_PLATFORM_SDK_VERSION) -ge 3; echo $$?),0)
++ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 3; echo $$?),0)
+     LOCAL_ADDITIONAL_DEPENDENCIES += \
+         fsck.f2fs \
+         mkfs.f2fs
+diff --git a/Lineageos-14-old/bootable/recovery-twrp/prebuilt/Android.mk b/Lineageos-14-new/bootable/recovery-twrp/prebuilt/Android.mk
+index f88f48f..0f7bbcf 100644
+--- a/Lineageos-14-old/bootable/recovery-twrp/prebuilt/Android.mk
++++ b/Lineageos-14-new/bootable/recovery-twrp/prebuilt/Android.mk
+@@ -199,7 +199,7 @@ ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
+     RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libopenaes.so
+ endif
+ ifeq ($(TARGET_USERIMAGES_USE_F2FS), true)
+-    ifeq ($(shell test $(CM_PLATFORM_SDK_VERSION) -ge 4; echo $$?),0)
++    ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 4; echo $$?),0)
+         RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/mkfs.f2fs
+         RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libf2fs.so
+     else ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 24; echo $$?),0)
+diff --git a/Lineageos-14-old/device/jiayu/s3_h560/device.mk b/Lineageos-14-new/device/jiayu/s3_h560/device.mk
+index 24e4a41..d77729f 100644
+--- a/Lineageos-14-old/device/jiayu/s3_h560/device.mk
++++ b/Lineageos-14-new/device/jiayu/s3_h560/device.mk
+@@ -17,8 +17,8 @@ PRODUCT_PACKAGES += \
+      Snap \
+      libcamera_parameters_ext
+     
+-PRODUCT_PACKAGES += \
+-    EngineerMode
++#PRODUCT_PACKAGES += \
++#    EngineerMode
+ 
+ PRODUCT_PACKAGES += \
+     libbt-vendor
+diff --git a/Lineageos-14-old/device/jiayu/s3_h560/rootdir/recovery.fstab b/Lineageos-14-new/device/jiayu/s3_h560/rootdir/recovery.fstab
+index 7cc26a3..e72f01b 100644
+--- a/Lineageos-14-old/device/jiayu/s3_h560/rootdir/recovery.fstab
++++ b/Lineageos-14-new/device/jiayu/s3_h560/rootdir/recovery.fstab
+@@ -3,18 +3,30 @@
+ # The filesystem that contains the filesystem checker binary (typically /system) cannot
+ # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+ 
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/recovery      /recovery       emmc  defaults	wait,check	#08
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/boot          /boot           emmc  defaults	wait,check	#07
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/system        /system         ext4  ro,lazytime,barrier=0							wait				#17
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/cache         /cache          f2fs  rw,lazytime,nosuid,nodev,inline_xattr,nobarrier			wait,check,formattable		#18
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/cache         /cache          ext4  lazytime,nosuid,nodev,noauto_da_alloc,discard,barrier=0		wait,check			#18
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata      /data           f2fs  rw,lazytime,nosuid,nodev,inline_xattr,nobarrier			wait,check,resize,encryptable=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/metadata		#19
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata      /data           ext4  lazytime,nosuid,nodev,noauto_da_alloc,discard,barrier=0		wait,check,resize,encryptable=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/metadata		#19
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/protect1      /protect_1      ext4  noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc,barrier=1	wait,check,autoformat		#03
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/protect2      /protect_2      ext4  noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc,barrier=1	wait,check,autoformat		#04
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/nvram         /nvram          emmc  defaults	wait,check	#02
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/para          /para           emmc  defaults	defaults	#10 /misc
+-/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/frp           /frp            emmc  defaults	defaults	#13
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/recovery      /recovery       emmc  defaults	wait,check	
++#08
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/boot          /boot           emmc  defaults	wait,check	
++#07
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/system        /system         ext4  ro,lazytime,barrier=0							wait				
++#17
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/cache         /cache          f2fs  rw,lazytime,nosuid,nodev,inline_xattr,nobarrier			wait,check,formattable		
++#18
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/cache         /cache          ext4  lazytime,nosuid,nodev,noauto_da_alloc,discard,barrier=0		wait,check			
++#18
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata      /data           f2fs  rw,lazytime,nosuid,nodev,inline_xattr,nobarrier			wait,check,resize,encryptable=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/metadata		
++#19
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/userdata      /data           ext4  lazytime,nosuid,nodev,noauto_da_alloc,discard,barrier=0		wait,check,resize,encryptable=/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/metadata		
++#19
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/protect1      /protect_1      ext4  noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc,barrier=1	wait,check,autoformat		
++#03
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/protect2      /protect_2      ext4  noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc,barrier=1	wait,check,autoformat		
++#04
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/nvram         /nvram          emmc  defaults	wait,check	
++#02
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/para          /para           emmc  defaults	defaults	
++#10 /misc
++/dev/block/platform/mtk-msdc.0/11230000.MSDC0/by-name/frp           /frp            emmc  defaults	defaults	
++#13
+ 
+ # vold-managed volumes
+ /devices/mtk-msdc.0/11240000.MSDC1*  	                  auto            auto  defaults	voldmanaged=external_sd:auto,encryptable=userdata
