@@ -1,7 +1,7 @@
-diff --git a/Lineageos-14-old/bootable/recovery-twrp/Android.mk b/Lineageos-14-new/bootable/recovery-twrp/Android.mk
+diff --git a/bootable/recovery-twrp/Android.mk b/bootable/recovery-twrp/Android.mk
 index 85cdd32..a096bce 100644
---- a/Lineageos-14-old/bootable/recovery-twrp/Android.mk
-+++ b/Lineageos-14-new/bootable/recovery-twrp/Android.mk
+--- a/bootable/recovery-twrp/Android.mk
++++ b/bootable/recovery-twrp/Android.mk
 @@ -475,7 +475,7 @@ else
  endif
  endif
@@ -11,10 +11,10 @@ index 85cdd32..a096bce 100644
      LOCAL_ADDITIONAL_DEPENDENCIES += \
          fsck.f2fs \
          mkfs.f2fs
-diff --git a/Lineageos-14-old/bootable/recovery-twrp/prebuilt/Android.mk b/Lineageos-14-new/bootable/recovery-twrp/prebuilt/Android.mk
+diff --git a/bootable/recovery-twrp/prebuilt/Android.mk b/bootable/recovery-twrp/prebuilt/Android.mk
 index f88f48f..0f7bbcf 100644
---- a/Lineageos-14-old/bootable/recovery-twrp/prebuilt/Android.mk
-+++ b/Lineageos-14-new/bootable/recovery-twrp/prebuilt/Android.mk
+--- a/bootable/recovery-twrp/prebuilt/Android.mk
++++ b/bootable/recovery-twrp/prebuilt/Android.mk
 @@ -199,7 +199,7 @@ ifneq ($(TW_EXCLUDE_ENCRYPTED_BACKUPS), true)
      RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libopenaes.so
  endif
@@ -24,10 +24,10 @@ index f88f48f..0f7bbcf 100644
          RELINK_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/mkfs.f2fs
          RELINK_SOURCE_FILES += $(TARGET_OUT_SHARED_LIBRARIES)/libf2fs.so
      else ifeq ($(shell test $(PLATFORM_SDK_VERSION) -ge 24; echo $$?),0)
-diff --git a/Lineageos-14-old/device/jiayu/s3_h560/device.mk b/Lineageos-14-new/device/jiayu/s3_h560/device.mk
+diff --git a/device/jiayu/s3_h560/device.mk b/device/jiayu/s3_h560/device.mk
 index 24e4a41..d77729f 100644
---- a/Lineageos-14-old/device/jiayu/s3_h560/device.mk
-+++ b/Lineageos-14-new/device/jiayu/s3_h560/device.mk
+--- a/device/jiayu/s3_h560/device.mk
++++ b/device/jiayu/s3_h560/device.mk
 @@ -17,8 +17,8 @@ PRODUCT_PACKAGES += \
       Snap \
       libcamera_parameters_ext
@@ -39,10 +39,10 @@ index 24e4a41..d77729f 100644
  
  PRODUCT_PACKAGES += \
      libbt-vendor
-diff --git a/Lineageos-14-old/device/jiayu/s3_h560/rootdir/recovery.fstab b/Lineageos-14-new/device/jiayu/s3_h560/rootdir/recovery.fstab
+diff --git a/device/jiayu/s3_h560/rootdir/recovery.fstab b/device/jiayu/s3_h560/rootdir/recovery.fstab
 index 7cc26a3..e72f01b 100644
---- a/Lineageos-14-old/device/jiayu/s3_h560/rootdir/recovery.fstab
-+++ b/Lineageos-14-new/device/jiayu/s3_h560/rootdir/recovery.fstab
+--- a/device/jiayu/s3_h560/rootdir/recovery.fstab
++++ b/device/jiayu/s3_h560/rootdir/recovery.fstab
 @@ -3,18 +3,30 @@
  # The filesystem that contains the filesystem checker binary (typically /system) cannot
  # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
