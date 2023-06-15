@@ -26,6 +26,12 @@ if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     bash device/jiayu/s3_h560/patches_mtk/apply-patches.sh
 fi
 
+# Apply Lineage-14.1 patches
+read -p "Do you want to apply Lineage-14.1 patches? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+    patch -p1 < android_local_manifest_jiayu/lineage-14.1.patch
+fi
+
 # Modify port number from ~/.jack-settings
 read -p "Do you want to modify port number? [Y,n]" -i Y input
 if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
