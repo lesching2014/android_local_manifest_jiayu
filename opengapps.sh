@@ -1,6 +1,6 @@
 FILE=device/jiayu/s3_h560/device.mk
-echo GAPPS_VARIANT := pico >> $FILE
-echo $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk) >> $FILE
+echo 'GAPPS_VARIANT := pico' >> $FILE
+echo '$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)' >> $FILE
 
 # You can add packages from versions higher then your set version. E.g. if you want to include Chrome, but you use GAPPS_VARIANT := micro
 # In your device/manufacturer/product/device.mk just add, for example:
