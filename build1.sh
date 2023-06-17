@@ -2,7 +2,7 @@
 #for d in ./*/ ; do (cd "$d" && git lfs pull); done
 size="10G"
 file_swap=/swapfile_$size.img
-if [ ! -f $file_swap ]; then
+if [ -e "$file_swap" ]; then
     sudo touch $file_swap && sudo fallocate -l $size /$file_swap && sudo mkswap /$file_swap && sudo swapon -p 20 /$file_swap
 fi
 source build/envsetup.sh
