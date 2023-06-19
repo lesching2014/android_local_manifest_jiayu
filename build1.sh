@@ -7,6 +7,7 @@ if [ "$(swapon --show --noheadings | grep "$file_swap" | wc -l)" -lt 1 ]; then
 fi
 source build/envsetup.sh
 breakfast s3_h560
+make installclean
 export JACK_SERVER_VM_ARGUMENTS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192M"
 export     ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx8192M"
 export LC_ALL=C
