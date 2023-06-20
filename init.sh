@@ -36,7 +36,7 @@ source $FILE
 
 echo "Select lineage version"
 echo "1. lineageos 14.1"
-echo "2. lineageos 15.0"
+echo "2. lineageos 15.1"
 read -p "Choose your option:[1,2]" input
 
 if [[ "$input" == "1" ]]; then
@@ -47,9 +47,9 @@ if [[ "$input" == "1" ]]; then
     # repo forall -vc "git reset --hard"
 elif [[ "$input" == "2" ]]; then
     # Initialize a repository with LineageOS
-    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b lineage-15.0
+    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b lineage-15.1
     mkdir -p .repo/local_manifests
-    cp -f android_local_manifest_jiayu/lineage-15.0.xml .repo/local_manifests
+    cp -f android_local_manifest_jiayu/lineage-15.1.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
 fi
 
