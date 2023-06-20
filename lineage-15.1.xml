@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <project path="device/jiayu/s3_h560" name="lesching2014/android_device_jiayu_s3_h560" revision="lineage-15.1" />
+  <project path="vendor/jiayu/s3_h560" name="lesching2014/android_vendor_jiayu_s3_h560" revision="master" />
+  <project path="vendor/mad" name="lesching2014/android_vendor_mad" revision="lineage-15.0" />
+  <project path="kernel/jiayu/s3_h560" name="lesching2014/android_kernel_jiayu_s3_h560" revision="master" />
+  <project path="aarch64-linux-android-opt-gnu-8.x" name="lesching2014/aarch64-linux-android" revision="master" />
+
+  <remove-project name="LineageOS/android_packages_apps_Nfc"/>
+
+  <project path="external/stlport" name="LineageOS/android_external_stlport" revision="lineage-15.1" />
+  <project path="packages/resources/devicesettings" name="LineageOS/android_packages_resources_devicesettings" revision="lineage-15.1" />
+  
+  <!-- remove-project name="LineageOS/android_bootable_recovery" -->
+  <project path="bootable/recovery-twrp" name="TeamWin/android_bootable_recovery" revision="android-8.1" />
+  <!-- project path="external/busybox" name="TeamWin/android_external_busybox" revision="android-7.1" -->
+  
+  <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
+</manifest>
