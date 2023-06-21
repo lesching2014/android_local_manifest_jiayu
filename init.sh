@@ -43,7 +43,7 @@ if [[ "$input" == "1" ]]; then
     # Initialize a repository with LineageOS
     repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14.1
     mkdir -p .repo/local_manifests
-    cp -f android_local_manifest_jiayu/local_manifests.xml .repo/local_manifests
+    cp -f android_local_manifest_jiayu/lineage-14.1.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
 elif [[ "$input" == "2" ]]; then
     # Initialize a repository with LineageOS
