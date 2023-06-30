@@ -1,5 +1,20 @@
 #!/bin/bash
 
+echo "Select lineage version"
+echo "1. lineageos 14.1"
+echo "2. lineageos 15.1"
+read -p "Choose your option:[1,2]" input
+
+cd ../
+if [[ "$input" == "1" ]]; then
+    # Initialize a repository with LineageOS
+    mkdir -p lineage-14.1
+    cd lineage-14.1
+elif [[ "$input" == "2" ]]; then
+    mkdir -p lineage-15.1
+    cd lineage-15.1
+fi
+
 if [ -z "$(git config user.name)" ]; then
     git config --global user.name "Your Name"
 fi
@@ -34,22 +49,17 @@ if [ -d "$HOME/bin" ] ; then
 fi
 source $FILE
 
-echo "Select lineage version"
-echo "1. lineageos 14.1"
-echo "2. lineageos 15.1"
-read -p "Choose your option:[1,2]" input
-
 if [[ "$input" == "1" ]]; then
     # Initialize a repository with LineageOS
     repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14.1
     mkdir -p .repo/local_manifests
-    cp -f android_local_manifest_jiayu/lineage-14.1.xml .repo/local_manifests
+    cp -f ../android_local_manifest_jiayu/lineage-14.1.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
 elif [[ "$input" == "2" ]]; then
     # Initialize a repository with LineageOS
     repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b lineage-15.1
     mkdir -p .repo/local_manifests
-    cp -f android_local_manifest_jiayu/lineage-15.1.xml .repo/local_manifests
+    cp -f ../android_local_manifest_jiayu/lineage-15.1.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
 fi
 
