@@ -1,6 +1,18 @@
 #repo forall -c git lfs pull
 #for d in ./*/ ; do (cd "$d" && git lfs pull); done
 
+echo "Select lineage version"
+echo "1. lineageos 14.1"
+echo "2. lineageos 15.1"
+read -p "Choose your option:[1,2]" input
+
+cd ../
+if [[ "$input" == "1" ]]; then
+    cd lineage-14.1
+elif [[ "$input" == "2" ]]; then
+    cd lineage-15.1
+fi
+
 echo "Method for cleaning out folder"
 echo "1. make clean"
 echo "2. make installclean"
