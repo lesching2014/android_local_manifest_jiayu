@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<manifest>
+  <!-- Remote names -->
+	<remote name="github" fetch="https://github.com/" />
+	<!-- Project s3_h560 -->
+  <project path="device/jiayu/s3_h560" name="MediatekAndroidDevelopers/android_device_jiayu_s3_h560" revision="o-8.0.0" remote="github" />
+  <project path="vendor/jiayu/s3_h560" name="MediatekAndroidDevelopers/android_vendor_jiayu_s3_h560" revision="o-8.0.0" remote="github" />
+  <project path="kernel/jiayu/s3_h560" name="MediatekAndroidDevelopers/android_kernel_jiayu_s3_h560" revision="o-8.0.0" remote="github" />
+  <project path="vendor/mad" name="MediatekAndroidDevelopers/android_vendor_mad" revision="o-8.1.0" remote="github" />
+  <project path="vendor/mediatek" name="Moyster/o_vendor_mediatek" revision="los-15.1" remote="github" />
+  <!-- vim:set ai et ts=2 sw=2 sts=2 fenc=utf-8: -->
+</manifest>
