@@ -3,7 +3,8 @@
 echo "Select lineage version"
 echo "1. lineageos 14.1"
 echo "2. lineageos 15.1"
-read -p "Choose your option:[1,2]" input
+echo "3. android 8.1.0"
+read -p "Choose your option:[1-3]" input
 
 cd ../
 if [[ "$input" == "1" ]]; then
@@ -13,8 +14,12 @@ if [[ "$input" == "1" ]]; then
 elif [[ "$input" == "2" ]]; then
     mkdir -p lineage-15.1
     cd lineage-15.1
+elif [[ "$input" == "3" ]]; then
+    mkdir -p android-8.1.0
+    cd android-8.1.0
 fi
 
+if [[ "$input" -ge "1" ]] && [[ "$input" -le "3" ]]; then
 if [ -z "$(git config user.name)" ]; then
     git config --global user.name "Your Name"
 fi
@@ -61,9 +66,16 @@ elif [[ "$input" == "2" ]]; then
     mkdir -p .repo/local_manifests
     cp -f ../android_local_manifest_jiayu/lineage-15.1.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
+elif [[ "$input" == "3" ]]; then
+    # Initialize a repository with LineageOS
+    repo init --depth=1 --manifest-url=https://android.googlesource.com/platform/manifest -b android-8.1.0_r81
+    mkdir -p .repo/local_manifests
+    cp -f ../android_local_manifest_jiayu/android-8.1.0.xml .repo/local_manifests
+    # repo forall -vc "git reset --hard"
 fi
 
 repopath=$(which repo)
 if [ "$repopath" ] ; then
     sudo cp -f .repo/repo/repo $repopath 
+fi
 fi
