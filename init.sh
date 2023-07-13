@@ -1,81 +1,86 @@
 #!/bin/bash
 
+script=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 echo "Select lineage version"
 echo "1. lineageos 14.1"
 echo "2. lineageos 15.1"
 echo "3. android 8.1.0"
 read -p "Choose your option:[1-3]" input
 
-cd ../
+cd ..
 if [[ "$input" == "1" ]]; then
-    # Initialize a repository with LineageOS
-    mkdir -p lineage-14.1
-    cd lineage-14.1
+    branch=cm-14.1
+    pathname=lineage-14.1
 elif [[ "$input" == "2" ]]; then
-    mkdir -p lineage-15.1
-    cd lineage-15.1
+    branch=lineage-15.1
+    pathname=lineage-15.1
 elif [[ "$input" == "3" ]]; then
-    mkdir -p android-8.1.0
-    cd android-8.1.0
+    branch=android-8.1.0_r81
+    pathname=android-8.1.0
+else
+    pathname=""
 fi
+mkdir -p $pathname
+cd $pathname
 
-if [[ "$input" -ge "1" ]] && [[ "$input" -le "3" ]]; then
-if [ -z "$(git config user.name)" ]; then
-    git config --global user.name "Your Name"
-fi
-if [ -z "$(git config user.email)" ]; then
-    git config --global user.email "you@example.com"
-fi
+if [[ "$pathname" != "" ]]; then
+    if [ -z "$(git config user.name)" ]; then
+        read -p -t 10 "Input display name:[anonymous]" input
+        if [ -z "$input" ]; then
+            input="anonymous"
+        fi
+        git config --global user.name $input
+    fi
+    if [ -z "$(git config user.email)" ]; then
+        read -p -t 10 "Input email address:[anonymous@example.com]" input
+        if [ -z "$input" ]; then
+            input="anonymous@example.com"
+        fi
+        git config --global user.email $input
+    fi
 
-version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-version3=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ -z "$version2" ] ; then
-    sudo apt install python2.7
-    sudo ln -s /usr/bin/python2.7 /usr/bin/python2
-fi
-version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ "$version" = "$version3" ] ; then
-    sudo rm -f /usr/bin/python
-fi
-version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
-if [ -z "$version" ] ; then
-    sudo ln -s /usr/bin/python2 /usr/bin/python
-fi
+    version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+    version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+    version3=$(python3 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+    if [ -z "$version2" ] ; then
+        sudo apt install python2.7
+        sudo ln -s /usr/bin/python2.7 /usr/bin/python2
+    fi
+    version2=$(python2 -V 2>&1 | grep -Po '(?<=Python )(.+)')
+    if [ "$version" = "$version3" ] ; then
+        sudo rm -f /usr/bin/python
+    fi
+    version=$(python -V 2>&1 | grep -Po '(?<=Python )(.+)')
+    if [ -z "$version" ] ; then
+        sudo ln -s /usr/bin/python2 /usr/bin/python
+    fi
 
-mkdir -p ~/bin
-curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-chmod a+x ~/bin/repo
+    if [ ! -f "$HOME/bin/repo" ]; then
+        mkdir -p "$HOME/bin"
+        curl https://storage.googleapis.com/git-repo-downloads/repo > "$HOME/bin/repo"
+        chmod a+x "$HOME/bin/repo"
 
-FILE=~/.profile
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    echo PATH="$HOME/bin:$PATH" >> $FILE
-fi
-source $FILE
+        FILE="$HOME/.profile"
+        if [ -d "$HOME/bin" ] ; then
+            echo PATH="$HOME/bin:$PATH" >> $FILE
+        fi
+        source $FILE
+    fi
 
-if [[ "$input" == "1" ]]; then
-    # Initialize a repository with LineageOS
-    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b cm-14.1
+    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b $branch
     mkdir -p .repo/local_manifests
-    cp -f ../android_local_manifest_jiayu/lineage-14.1.xml .repo/local_manifests
+    cp -f ../android_local_manifest_jiayu/$pathname.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
-elif [[ "$input" == "2" ]]; then
-    # Initialize a repository with LineageOS
-    repo init --depth=1 --manifest-url=https://github.com/LineageOS/android -b lineage-15.1
-    mkdir -p .repo/local_manifests
-    cp -f ../android_local_manifest_jiayu/lineage-15.1.xml .repo/local_manifests
-    # repo forall -vc "git reset --hard"
-elif [[ "$input" == "3" ]]; then
-    # Initialize a repository with LineageOS
-    repo init --depth=1 --manifest-url=https://android.googlesource.com/platform/manifest -b android-8.1.0_r81
-    mkdir -p .repo/local_manifests
-    cp -f ../android_local_manifest_jiayu/android-8.1.0.xml .repo/local_manifests
-    # repo forall -vc "git reset --hard"
+
+    newer=$(repo --version | grep -oP '(?<=repo version v).*')
+    current=$(repo --version | grep -oP '(?<=repo launcher version ).*')
+    if [[ "$newer" != "" ]] && [[ "$newer" != "$current" ]] ; then
+        repopath=$(which repo)
+        if [ "$repopath" ] ; then
+            cp -f .repo/repo/repo $repopath
+        fi
+    fi
 fi
 
-repopath=$(which repo)
-if [ "$repopath" ] ; then
-    sudo cp -f .repo/repo/repo $repopath 
-fi
-fi
+cd $script
