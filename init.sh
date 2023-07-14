@@ -7,6 +7,11 @@ echo "1. lineageos 14.1"
 echo "2. lineageos 15.1"
 echo "3. android 8.1.0"
 read -p "Choose your option:[1-3]" input
+echo ""
+read -p "Do you wnat to include GAPPS?[y/N]" opengapps
+echo ""
+read -p "Do you wnat to include MAGISK?[y/N]" magisk
+echo ""
 
 cd ..
 if [[ "$input" == "1" ]]; then
@@ -72,7 +77,12 @@ if [[ "$pathname" != "" ]]; then
     mkdir -p .repo/local_manifests
     cp -f ../android_local_manifest_jiayu/$pathname.xml .repo/local_manifests
     # repo forall -vc "git reset --hard"
-
+    if [[ "$opengapps" == "y" ]] || [[ "$opengapps" == "Y" ]]; then
+        cp -f ../android_local_manifest_jiayu/opengapps.xml .repo/local_manifests
+    fi
+    if [[ "$magisk" == "y" ]] || [[ "$magisk" == "Y" ]]; then
+        cp -f ../android_local_manifest_jiayu/magisk.xml .repo/local_manifests
+    fi    
     newer=$(repo --version | grep -oP '(?<=repo version v).*')
     current=$(repo --version | grep -oP '(?<=repo launcher version ).*')
     if [[ "$newer" != "" ]] && [[ "$newer" != "$current" ]] ; then
