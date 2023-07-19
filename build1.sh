@@ -28,6 +28,7 @@ echo "2. make installclean"
 echo ""
 echo "0. no clean made"
 read -t 10 -p "Choose your option:[1,2,0](default:0)" input
+echo ""
 
 size="30G"
 file_swap=/swapfile_$size.img
@@ -54,6 +55,7 @@ export LC_ALL=C
 
 # Increase Java maximum memory to 4G
 read -t 5 -p "Do you want to increase Java memory to 4G? [Y,n]" IncreaseAns
+echo ""
 
 # Build ROM
 echo "Building ROM"
@@ -63,6 +65,7 @@ echo "3. system image only"
 echo "4. all image (boot + recovery + system)"
 echo "5. clean"
 read -t 5 -p "Choose your option:[Enter key:4]" input
+echo ""
 
 if [[ $IncreaseAns == "Y" || $IncreaseAns == "y" || $IncreaseAns == "" ]]; then
     ./prebuilts/sdk/tools/jack-admin kill-server
