@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Install essential packages
-# read -p "Do you want to install esseential packages? [Y,n]" -i Y input
-# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+read -p "Do you want to install esseential packages? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     sudo apt install bc bison build-essential ccache curl \
     flex g++-multilib gcc-multilib git git-lfs gnupg gperf \
     imagemagick lib32readline-dev lib32z1-dev \
@@ -10,8 +10,8 @@
     libssl-dev libxml2 libxml2-utils lzop pngcrush rsync schedtool \
     squashfs-tools xsltproc zip zlib1g-dev \
     lib32ncurses-dev lib32ncurses5-dev openjdk-8-jdk python2.7
-    # sudo apt install libwxgtk3.0-dev python3
-# fi
+    sudo apt install libwxgtk3.0-dev python3
+fi
 
 #Install repo
 FILE=~/bin/repo
@@ -45,11 +45,12 @@ if [ -z "$version" ] ; then
 fi
 
 # Create ccache
-# read -p "Do you want to create ccache? [Y,n]" -i Y input
-# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+read -p "Do you want to create ccache? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     if [[ "$(ccache --show-stats | grep 'max cache size' | cut -d' ' -f25)" != "50.0" ]]; then
         FILE=~/.bashrc
         echo export USE_CCACHE=1 >> $FILE
+        echo export CCACHE_DISABLE=1 >> $FILE
         echo export CCACHE_EXEC=/usr/bin/ccache >> $FILE
         source $FILE
         ccache -M 50G
@@ -57,7 +58,7 @@ fi
     else
         echo "Set cache size limit to 50.0 GB"    
     fi
-# fi
+fi
 
 JAVA_MAJOR_VERSION=$(java -version 2>&1 | grep -oP 'version "?(1\.)?\K\d+' || true)
 if [[ $JAVA_MAJOR_VERSION -eq 8 ]]; then
@@ -84,8 +85,8 @@ else
 fi
 
 # Install gcc-9
-# read -p "Do you want to install gcc-9? [Y,n]" -i Y input
-# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+read -p "Do you want to install gcc-9? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     GCC_MAJOR_VERSION=$(gcc --version | grep ^gcc | sed 's/^.* //g' | cut -f1 -d.)
     if [[ $GCC_MAJOR_VERSION -eq 9 ]]; then
         echo "gcc-9 is installed "
@@ -93,18 +94,18 @@ fi
         sudo apt install gcc-9
         sudo update-alternatives --config gcc
     fi
-# fi
+fi
 
 # Remove TLSv1 and TLSv1.1 from /etc/java-8-openjdk/security/java.security file
-# read -p "Do you want to remove TLSv1 and TLSv1.1? [Y,n]" -i Y input
-# if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
+read -p "Do you want to remove TLSv1 and TLSv1.1? [Y,n]" -i Y input
+if [[ $input == "Y" || $input == "y" || $input == "" ]]; then
     FILE=/etc/java-8-openjdk/security/java.security 
     if [ -f $FILE ]; then
         cat $FILE | grep -i "TLSv1, TLSv1.1, "
         sudo sed -i -e 's/TLSv1, TLSv1.1, \(.*\)/\1/' $FILE
         echo "AFTER sed......." | cat $FILE | grep -i "TLSv1, TLSv1.1, "
     fi
-# fi
+fi
 
 # Modify port number from ~/.jack-settings
 read -p "Do you want to modify port number? [Y,n]" -i Y input
