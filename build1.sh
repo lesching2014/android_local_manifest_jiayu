@@ -40,7 +40,7 @@ source build/envsetup.sh
 breakfast s3_h560
 case $input in  
   1) make clean ;; 
-  2) make install ;; 
+  2) make installclean ;; 
   0|"") ;;
   *) echo dont know ;; 
 esac
