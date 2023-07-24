@@ -7,7 +7,7 @@ wget https://raw.githubusercontent.com/lesching2014/android_local_manifest_jiayu
 
 Clone local manifest
 ```
-git clone https://github.com/lesching2014/android_local_manifest_jiayu
+git clone --depth=1 https://github.com/lesching2014/android_local_manifest_jiayu
 ```
 
 Install essential packages and Modify settings
