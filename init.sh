@@ -18,7 +18,7 @@ echo "6. twrp 12.1"
 echo "7. twrp 13"
 echo ""
 echo "0. NONE"
-read -p "Choose your option:[1,2,0](default:0)" twrp
+read -p "Choose your option:[1-7,0](default:0)" twrp
 echo ""
 read -p "Do you wnat to include GAPPS?[y/N]" opengapps
 echo ""
