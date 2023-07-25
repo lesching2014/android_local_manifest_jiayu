@@ -11,6 +11,11 @@ echo ""
 echo "Select twrp version"
 echo "1. twrp 7.1"
 echo "2. twrp 8.1"
+echo "3. twrp 9.0"
+echo "4. twrp 10.0"
+echo "5. twrp 11"
+echo "6. twrp 12.1"
+echo "7. twrp 13"
 echo ""
 echo "0. NONE"
 read -p "Choose your option:[1,2,0](default:0)" twrp
@@ -20,25 +25,29 @@ echo ""
 read -p "Do you wnat to include MAGISK?[y/N]" magisk
 echo ""
 
-if [[ "$input" == "1" ]]; then
-    branch=cm-14.1
-    pathname=lineage-14.1
-elif [[ "$input" == "2" ]]; then
-    branch=lineage-15.1
-    pathname=lineage-15.1
-elif [[ "$input" == "3" ]]; then
-    branch=android-8.1.0_r81
-    pathname=android-8.1.0
-else
-    pathname=""
-fi
-if [[ "$twrp" == "1" ]]; then
-    twrpbranch=twrp-7.1
-elif [[ "$twrp" == "2" ]]; then
-    twrpbranch=twrp-8.1
-else
-    twrpbranch=""
-fi
+case $input in  
+  1) branch=cm-14.1
+     pathname=lineage-14.1
+     ;;
+  2) branch=lineage-15.1
+     pathname=lineage-15.1
+     ;;
+  3) branch=android-8.1.0_r81
+     pathname=android-8.1.0
+     ;;
+  *) pathname="" ;; 
+esac
+
+case $twrp in  
+  1) twrpbranch=twrp-7.1 ;;
+  2) twrpbranch=twrp-8.1 ;;
+  3) twrpbranch=twrp-9.0 ;;
+  4) twrpbranch=twrp-10.0 ;;
+  5) twrpbranch=twrp-11 ;;
+  6) twrpbranch=twrp-12.1 ;;
+  7) twrpbranch=twrp-13 ;;
+  *) twrpbranch="" ;; 
+esac
 
 if [[ "$pathname" != "" ]]; then
     cd ..
