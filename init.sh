@@ -34,7 +34,7 @@ else
 fi
 if [[ "$twrp" == "1" ]]; then
     twrpbranch=twrp-7.1
-elif [[ "$input" == "2" ]]; then
+elif [[ "$twrp" == "2" ]]; then
     twrpbranch=twrp-8.1
 else
     twrpbranch=""
