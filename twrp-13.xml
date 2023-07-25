@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- remove-project name="LineageOS/android_bootable_recovery" -->
+  <project path="bootable/recovery-twrp" name="TeamWin/android_bootable_recovery" revision="android-13" />
+  <!-- project path="external/magisk-prebuilt" name="TeamWin/external_magisk-prebuilt" revision="android-13" / -->
+  <!-- project path="external/busybox" name="TeamWin/android_external_busybox" revision="android-7.1" -->
+</manifest>
