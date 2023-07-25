@@ -39,6 +39,9 @@ if [ -d "$PWD/$pathname" ] ; then
     echo "l. local only"
     echo "f. full sync"
     read -p "Choose your option:[n,l,F]" input
+    echo ""
+    read -p "Do you wnat to apply patches?[Y/n]" patches
+    echo ""
 
     case $input in
         n|N) repo sync -n ;; 
@@ -46,6 +49,14 @@ if [ -d "$PWD/$pathname" ] ; then
         f|F|"") repo sync ;;
         *) echo dont know ;; 
     esac
+    
+    if [[ "$input" == "l" ]] || [[ "$input" == "L" ]] || [[ "$input" == "f" ]] || [[ "$input" == "F" ]]; then
+        if [[ "$patches" == "y" ]] || [[ "$patches" == "Y" ]] || [[ "$patches" == "" ]]; then
+            path=$(dirname "$(find ../lineage-14.1 -type f -name 'patch.sh')")
+            cd $path
+            bash patch.sh -i
+        fi
+    fi
 fi
 
 cd $script
