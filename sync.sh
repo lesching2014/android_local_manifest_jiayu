@@ -50,7 +50,7 @@ if [ -d "$PWD/$pathname" ] ; then
         *) echo dont know ;; 
     esac
     
-    if [[ "$input" == "l" ]] || [[ "$input" == "L" ]] || [[ "$input" == "f" ]] || [[ "$input" == "F" ]]; then
+    if [[ "$input" == "l" ]] || [[ "$input" == "L" ]] || [[ "$input" == "f" ]] || [[ "$input" == "F" ]] || [[ "$input" == "" ]]; then
         if [[ "$patches" == "y" ]] || [[ "$patches" == "Y" ]] || [[ "$patches" == "" ]]; then
             path=$(dirname "$(find ../lineage-14.1 -type f -name 'patch.sh')")
             cd $path
